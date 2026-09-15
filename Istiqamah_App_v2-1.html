@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ISTIQAMAH v2</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#06120e;color:#effaf5;font-family:Inter,system-ui,sans-serif}
+:root{--g:#53d79d;--muted:#8ca59a;--card:#10231bdd;--line:#ffffff12;--gold:#ffd766}
+.app{max-width:760px;margin:auto;padding:18px 14px 92px}.screen{display:none;animation:in .3s}.screen.on{display:block}@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+body:before{content:"";position:fixed;inset:-20%;z-index:-1;background:radial-gradient(circle at 20% 10%,#145b42 0,transparent 28%),radial-gradient(circle at 90% 90%,#123d58 0,transparent 25%);filter:blur(15px)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.logo{font-weight:800;letter-spacing:2px}.pill{font-size:11px;background:#ffffff0b;border:1px solid var(--line);padding:7px 10px;border-radius:99px;color:#b4c9c0}
+.hero,.panel,.card{background:linear-gradient(145deg,#122a21e8,#0b1b16e8);border:1px solid var(--line);box-shadow:0 18px 45px #0005;backdrop-filter:blur(14px);border-radius:22px}.hero{padding:20px}.hero h1{font-size:32px;line-height:1.05;margin:7px 0}.muted{color:var(--muted);font-size:12px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}.card{padding:14px}.label{font-size:10px;color:var(--muted)}.num{font-size:25px;font-weight:800;margin-top:4px}
+.panel{padding:15px;margin-top:11px}.panel h2{font-size:15px;margin:0 0 12px}
+.progress{height:8px;background:#ffffff0d;border-radius:99px;overflow:hidden;margin-top:9px}.fill{height:100%;background:linear-gradient(90deg,#2c9b70,#9bf3c7);width:0;transition:.45s}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.btn{padding:13px;border:1px solid var(--line);border-radius:15px;background:#ffffff08;color:#fff;text-align:left}.btn b{display:block}.btn small{color:var(--muted)}
+.datebar{display:flex;gap:7px;margin-bottom:10px}.datebar>*{padding:10px;border-radius:10px;border:1px solid var(--line);background:#ffffff08;color:#fff}.datebar input{flex:1}
+.row{display:flex;align-items:center;justify-content:space-between;padding:10px 2px;border-bottom:1px solid #ffffff09}.row:last-child{border:0}.habit{font-size:14px;font-weight:600}.tick{width:33px;height:33px;border-radius:10px;border:1px solid var(--line);background:#ffffff08;color:white;font-size:17px}.tick.on{background:#2d9d71;border-color:#63dfab;box-shadow:0 0 18px #35bd8155}
+.add{display:flex;gap:8px;margin-top:12px}.input{flex:1;min-width:0;padding:11px;border-radius:11px;border:1px solid var(--line);background:#ffffff08;color:#fff}.primary{padding:11px 14px;border:0;border-radius:11px;background:#277d5b;color:white;font-weight:700}
+.manage{display:flex;gap:6px}.icon{border:0;background:#ffffff08;color:#9db1a9;border-radius:8px;padding:7px}
+.quote{font-weight:600;line-height:1.55}.quote span{display:block;color:var(--muted);font-size:10px;margin-top:7px}
+.heat{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}.cell{aspect-ratio:1;border-radius:4px;background:#ffffff08}.cell.l1{background:#174b37}.cell.l2{background:#287e5b}.cell.l3{background:#42b77f}.cell.l4{background:#83e7ba}
+.badges{display:flex;gap:7px;flex-wrap:wrap}.badge{padding:9px;border-radius:11px;background:#ffffff08;color:#748b82;font-size:11px}.badge.on{color:var(--gold);background:#4d3d0e}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(760px,100%);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:#07130fee;border-top:1px solid var(--line);backdrop-filter:blur(18px);z-index:9}.nav{border:0;background:none;color:#70877e;font:inherit;font-size:9px}.nav b{display:block;font-size:19px}.nav.on{color:var(--g)}
+.modal{position:fixed;inset:0;background:#0009;display:none;align-items:flex-end;z-index:20}.modal.show{display:flex}.sheet{width:min(760px,100%);margin:auto;background:#10231c;border:1px solid var(--line);border-radius:25px 25px 0 0;padding:18px}.sheet h2{margin-top:0}.sheet input{width:100%;padding:12px;border-radius:11px;background:#ffffff08;border:1px solid var(--line);color:#fff}.sheet button{width:100%;margin-top:9px;padding:12px;border:0;border-radius:11px;background:#277d5b;color:#fff;font-weight:700}
+@media(min-width:650px){.grid{grid-template-columns:repeat(4,1fr)}}
+</style></head>
+<body>
+<div class="app">
+<div class="top"><div class="logo">ISTIQAMAH.</div><div class="pill">LV <span id="level">1</span> • <span id="xp">0</span> XP</div></div>
+
+<section id="home" class="screen on">
+<div class="hero"><div class="muted">ASSALAMUALAIKUM 👋</div><h1>Jaga hari ini.<br>Bina diri esok.</h1><div class="muted">“Jangan tunggu sempurna untuk bermula. Mula, kemudian istiqamah.”</div></div>
+<div class="grid"><div class="card"><div class="label">⭐ BINTANG</div><div class="num" id="stars">0</div></div><div class="card"><div class="label">🔥 STREAK</div><div class="num" id="streak">0</div></div><div class="card"><div class="label">⚡ XP</div><div class="num" id="xpc">0</div></div><div class="card"><div class="label">🏆 BEST</div><div class="num" id="best">0/0</div></div></div>
+<div class="panel"><div class="label">LEVEL PROGRESS</div><div class="num" id="lvltext">Level 1</div><div class="progress"><div class="fill" id="lvfill"></div></div></div>
+<div class="panel"><h2>QUICK ACCESS</h2><div class="actions"><button class="btn" onclick="go('tracker')"><b>☑️ Daily Tracker</b><small>Tambah habit bila-bila</small></button><button class="btn" onclick="go('fitness')"><b>🏃 Fitness</b><small>Joging & kalori</small></button><button class="btn" onclick="go('stats')"><b>📈 Journey</b><small>Heatmap & achievement</small></button><button class="btn" onclick="openSettings()"><b>⚙️ Manage Habit</b><small>Edit / buang habit</small></button></div></div>
+</section>
+
+<section id="tracker" class="screen"><div class="hero"><div class="muted">DAILY TRACKER</div><h1>Checklist ✓</h1><div class="muted">Full tick semua habit hari ini = ⭐</div></div>
+<div class="panel"><div class="datebar"><button onclick="move(-1)">‹</button><input id="date" type="date" onchange="renderTracker()"><button onclick="move(1)">›</button></div><div id="habits"></div><div class="add"><input id="newhabit" class="input" placeholder="Contoh: Baca 10 muka surat"><button class="primary" onclick="addHabit()">＋ Tambah</button></div></div></section>
+
+<section id="fitness" class="screen"><div class="hero"><div class="muted">FITNESS</div><h1>Gerak badan. 🏃</h1><div class="muted">Anggar kalori joging dan simpan sesi.</div></div>
+<div class="panel"><h2>CALCULATOR</h2><div class="grid"><div><div class="label">Berat kg</div><input id="weight" class="input" value="60" type="number"></div><div><div class="label">Minit</div><input id="mins" class="input" value="30" type="number"></div><div><div class="label">Kelajuan km/j</div><input id="speed" class="input" value="8" type="number" step=".1"></div></div><button class="primary" style="margin-top:10px;width:100%" onclick="calc()">Kira kalori</button><div class="num" id="cal">— kcal</div><div class="muted">Anggaran berdasarkan MET; nilai sebenar boleh berbeza.</div></div>
+<div class="panel"><h2>LOG</h2><div class="muted">Sesi <b id="sessions">0</b> • <b id="totalmins">0</b> min • <b id="totalcal">0</b> kcal</div><button class="primary" style="margin-top:10px;width:100%" onclick="logRun()">＋ Simpan sesi</button></div></section>
+
+<section id="stats" class="screen"><div class="hero"><div class="muted">YOUR JOURNEY</div><h1>Progress anta. 📈</h1><div class="muted">Sedikit setiap hari. Lama-lama jadi luar biasa.</div></div>
+<div class="panel"><h2>🔥 30-DAY HEATMAP</h2><div class="heat" id="heat"></div></div><div class="panel"><h2>🏅 ACHIEVEMENT</h2><div class="badges" id="ach"></div></div><div class="panel"><h2>💬 MOTIVASI</h2><div class="quote" id="mot"></div></div></section>
+
+<section id="settings" class="screen"><div class="hero"><div class="muted">CUSTOMIZE</div><h1>Manage Habit ⚙️</h1><div class="muted">Tambah, edit atau padam habit terus dalam app.</div></div><div class="panel" id="manage"></div></section>
+</div>
+
+<nav><button class="nav on" data-s="home" onclick="go('home')"><b>⌂</b>Home</button><button class="nav" data-s="tracker" onclick="go('tracker')"><b>✓</b>Tracker</button><button class="nav" data-s="fitness" onclick="go('fitness')"><b>🏃</b>Fitness</button><button class="nav" data-s="stats" onclick="go('stats')"><b>◔</b>Stats</button><button class="nav" data-s="settings" onclick="go('settings')"><b>⚙</b>Manage</button></nav>
+
+<div id="modal" class="modal"><div class="sheet"><h2>Edit habit</h2><input id="editinput"><button onclick="saveEdit()">Simpan</button><button onclick="closeModal()" style="background:#ffffff10">Batal</button></div></div>
+
+<script>
+const DEFAULT=["Qiyamullail","Subuh","Zohor","Asar","Maghrib","Isyak","Cut Sugar","Murajaah","Joging","No PMO","No +18"];
+let DB=JSON.parse(localStorage.getItem("istiV2")||"null")||{habits:DEFAULT,days:{},runs:[],xp:0};
+let editIndex=-1;date.value=new Date().toISOString().slice(0,10);
+function save(){localStorage.setItem("istiV2",JSON.stringify(DB))}
+function A(d){return DB.days[d]||(DB.days[d]=Array(DB.habits.length).fill(false))}
+function sync(){Object.values(DB.days).forEach(a=>{while(a.length<DB.habits.length)a.push(false);if(a.length>DB.habits.length)a.length=DB.habits.length})}
+function go(s){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("on"));document.getElementById(s).classList.add("on");document.querySelectorAll(".nav").forEach(x=>x.classList.toggle("on",x.dataset.s===s));if(s==="stats")drawStats();if(s==="settings")renderManage()}
+function renderTracker(){sync();let a=A(date.value),b=document.getElementById("habits");b.innerHTML="";DB.habits.forEach((h,i)=>{let r=document.createElement("div");r.className="row";r.innerHTML='<span class="habit">'+h+'</span><button class="tick '+(a[i]?'on':'')+'" onclick="toggle('+i+')">'+(a[i]?'✓':'')+'</button>';b.appendChild(r)});save();update()}
+function toggle(i){let a=A(date.value),before=a[i];a[i]=!a[i];if(!before&&a[i])DB.xp+=10;save();renderTracker()}
+function addHabit(){let v=document.getElementById("newhabit").value.trim();if(!v)return;if(DB.habits.includes(v)){alert("Habit itu dah ada.");return}DB.habits.push(v);Object.values(DB.days).forEach(a=>a.push(false));document.getElementById("newhabit").value="";save();renderTracker();renderManage()}
+function renderManage(){let b=document.getElementById("manage");b.innerHTML='<div class="list"></div>';let list=b.firstChild;DB.habits.forEach((h,i)=>{let r=document.createElement("div");r.className="row";r.innerHTML='<span class="habit">'+h+'</span><span class="manage"><button class="icon" onclick="editHabit('+i+')">✏️</button><button class="icon" onclick="delHabit('+i+')">🗑️</button></span>';list.appendChild(r)})}
+function editHabit(i){editIndex=i;editinput.value=DB.habits[i];modal.classList.add("show");editinput.focus()}
+function saveEdit(){let v=editinput.value.trim();if(v){DB.habits[editIndex]=v;save();closeModal();renderTracker();renderManage()}}
+function delHabit(i){if(DB.habits.length<=1){alert("Mesti ada sekurang-kurangnya satu habit.");return}if(confirm("Padam habit ini?")){DB.habits.splice(i,1);Object.values(DB.days).forEach(a=>a.splice(i,1));save();renderTracker();renderManage()}}
+function closeModal(){modal.classList.remove("show")}
+function openSettings(){go("settings")}
+function move(n){let d=new Date(date.value);d.setDate(d.getDate()+n);date.value=d.toISOString().slice(0,10);renderTracker()}
+function update(){let keys=Object.keys(DB.days),stars=0,best=0,total=0;keys.forEach(k=>{let n=A(k).filter(Boolean).length;total+=n;best=Math.max(best,n);if(DB.habits.length&&n===DB.habits.length)stars++});let level=Math.floor(DB.xp/100)+1;starsEl.textContent=stars;streak.textContent=calcStreak();xpc.textContent=DB.xp;level.textContent=level;lvltext.textContent="Level "+level+" • "+(DB.xp%100)+"/100 XP";lvfill.style.width=(DB.xp%100)+"%";document.getElementById("best").textContent=best+"/"+DB.habits.length;document.getElementById("sessions").textContent=DB.runs.length;document.getElementById("totalmins").textContent=DB.runs.reduce((s,x)=>s+x.min,0);document.getElementById("totalcal").textContent=Math.round(DB.runs.reduce((s,x)=>s+x.cal,0));}
+function calcStreak(){let n=0,d=new Date();for(let i=0;i<366;i++){let k=d.toISOString().slice(0,10);if(DB.days[k]&&A(k).every(Boolean)){n++;d.setDate(d.getDate()-1)}else break}return n}
+function calc(){let w=+weight.value||0,m=+mins.value||0,s=+speed.value||0,met=s>=10?10:s>=8?8.3:s>=6.5?7:6;cal.textContent=Math.round(met*3.5*w/200*m)+" kcal"}
+function logRun(){calc();let c=parseFloat(cal.textContent)||0;DB.runs.push({min:+mins.value||0,cal:c});DB.xp+=20;save();update()}
+function drawStats(){let h=document.getElementById("heat");h.innerHTML="";let now=new Date();for(let i=29;i>=0;i--){let d=new Date();d.setDate(now.getDate()-i);let k=d.toISOString().slice(0,10),n=DB.days[k]?A(k).filter(Boolean).length:0,z=document.createElement("div");z.className="cell "+(n? n<DB.habits.length*.35?"l1":n<DB.habits.length*.7?"l2":n<DB.habits.length?"l3":"l4":"");h.appendChild(z)}let s=Object.values(DB.days).filter(a=>a.length===DB.habits.length&&a.every(Boolean)).length,ac=document.getElementById("ach");ac.innerHTML="";[[7,"🥉 7 ⭐"],[14,"🥈 14 ⭐"],[30,"🥇 30 ⭐"],[50,"👑 50 ⭐"],[100,"💎 100 ⭐"]].forEach(x=>{let z=document.createElement("span");z.className="badge "+(s>=x[0]?"on":"");z.textContent=s>=x[0]?x[1]+" ✓":x[1]+" 🔒";ac.appendChild(z)});mot.innerHTML="“Istiqamah bukan tentang tidak pernah jatuh. Ia tentang memilih untuk bangun setiap kali jatuh.”<span>— teruskan.</span>"}
+function resetAll(){if(confirm("Reset semua progress dan habit tambahan?")){DB={habits:DEFAULT,days:{},runs:[],xp:0};save();renderTracker();update();renderManage()}}
+const starsEl=document.getElementById("stars");renderTracker();update();
+</script></body></html>

@@ -24,7 +24,11 @@ body:before{content:"";position:fixed;inset:-20%;z-index:-1;background:radial-gr
 nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(760px,100%);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:#07130fee;border-top:1px solid var(--line);backdrop-filter:blur(18px);z-index:9}.nav{border:0;background:none;color:#70877e;font:inherit;font-size:9px}.nav b{display:block;font-size:19px}.nav.on{color:var(--g)}
 .modal{position:fixed;inset:0;background:#0009;display:none;align-items:flex-end;z-index:20}.modal.show{display:flex}.sheet{width:min(760px,100%);margin:auto;background:#10231c;border:1px solid var(--line);border-radius:25px 25px 0 0;padding:18px}.sheet h2{margin-top:0}.sheet input{width:100%;padding:12px;border-radius:11px;background:#ffffff08;border:1px solid var(--line);color:#fff}.sheet button{width:100%;margin-top:9px;padding:12px;border:0;border-radius:11px;background:#277d5b;color:#fff;font-weight:700}
 @media(min-width:650px){.grid{grid-template-columns:repeat(4,1fr)}}
-</style></head>
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0b3d2e">
+<link rel="apple-touch-icon" href="icon-192.png">
+</head>
 <body>
 <div class="app">
 <div class="top"><div class="logo">ISTIQAMAH.</div><div class="pill">LV <span id="level">1</span> • <span id="xp">0</span> XP</div></div>
@@ -78,4 +82,6 @@ function logRun(){calc();let c=parseFloat(cal.textContent)||0;DB.runs.push({min:
 function drawStats(){let h=document.getElementById("heat");h.innerHTML="";let now=new Date();for(let i=29;i>=0;i--){let d=new Date();d.setDate(now.getDate()-i);let k=d.toISOString().slice(0,10),n=DB.days[k]?A(k).filter(Boolean).length:0,z=document.createElement("div");z.className="cell "+(n? n<DB.habits.length*.35?"l1":n<DB.habits.length*.7?"l2":n<DB.habits.length?"l3":"l4":"");h.appendChild(z)}let s=Object.values(DB.days).filter(a=>a.length===DB.habits.length&&a.every(Boolean)).length,ac=document.getElementById("ach");ac.innerHTML="";[[7,"🥉 7 ⭐"],[14,"🥈 14 ⭐"],[30,"🥇 30 ⭐"],[50,"👑 50 ⭐"],[100,"💎 100 ⭐"]].forEach(x=>{let z=document.createElement("span");z.className="badge "+(s>=x[0]?"on":"");z.textContent=s>=x[0]?x[1]+" ✓":x[1]+" 🔒";ac.appendChild(z)});mot.innerHTML="“Istiqamah bukan tentang tidak pernah jatuh. Ia tentang memilih untuk bangun setiap kali jatuh.”<span>— teruskan.</span>"}
 function resetAll(){if(confirm("Reset semua progress dan habit tambahan?")){DB={habits:DEFAULT,days:{},runs:[],xp:0};save();renderTracker();update();renderManage()}}
 const starsEl=document.getElementById("stars");renderTracker();update();
-</script></body></html>
+</script>
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js')); }</script>
+</body></html>
